@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Lu</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0f;
+            --card-bg: #13131a;
+            --accent-color: #8b5cf6;
+            --accent-hover: #a78bfa;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #232330;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .lang-selector select {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+        }
+
+        .intro {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 60px0px;
+            margin: 10px auto 0;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid #232330;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid #1e1e2f;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .project-thumb {
+            height: 180px;
+            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .project-thumb::after {
+            content: "✦";
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            opacity: 0.6;
+        }
+
+        .project-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-tag {
+            align-self: flex-start;
+            background-color: rgba(139, 92, 246, 0.15);
+            color: var(--accent-hover);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            display: inline-block;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s;
+        }
+
+        .project-link:hover {
+            background-color: var(--accent-hover);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1 id="nav-logo">Lu<span>.Portfolio</span></h1>
+        </div>
+        <div class="controls">
+            <div class="lang-selector">
+                <select id="langSelect" onchange="changeLanguage()">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <p id="intro-text">Explorá mis trabajos más recientes y producciones.</p>
+        </section>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProjects('all')" id="btn-all">Todos</button>
+            <button class="filter-btn" onclick="filterProjects('audiovisual')" id="btn-av">Audiovisual</button>
+            <button class="filter-btn" onclick="filterProjects('fotografia')" id="btn-foto">Fotografía</button>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Kitschy -->
+            <div class="project-card" data-category="audiovisual">
+                <div class="project-thumb"></div>
+                <div class="project-info">
+                    <span class="project-tag" data-tag="av">Audiovisual</span>
+                    <h3 class="p-title">KITSCHY</h3>
+                    <p class="p-desc" data-es="Fashion Show & Videos Detrás de Escena (2026)." data-en="Fashion Show & Behind-the-Scenes Videos (2026).">Fashion Show & Videos Detrás de Escena (2026).</p>
+                    <a href="https://drive.google.com/drive/folders/1ScpU2S2dQxYRCPxRk1LFiLYwlzoDjhHZ?usp=drive_link" target="_blank" class="project-link" data-link="Ver Proyecto">Ver Proyecto</a>
+                </div>
+            </div>
+
+            <!-- Ciclo Sintonía -->
+            <div class="project-card" data-category="audiovisual">
+                <div class="project-thumb"></div>
+                <div class="project-info">
+                    <span class="project-tag" data-tag="av">Audiovisual</span>
+                    <h3 class="p-title">CICLO SINTONÍA</h3>
+                    <p class="p-desc" data-es="Registro audiovisual y cobertura de evento." data-en="Audiovisual recording and event coverage.">Registro audiovisual y cobertura de evento.</p>
+                    <a href="https://drive.google.com/file/d/1Bg7L2i3tYcWB5HfvPJpWnM2cp0VrG1eT/view?usp=drive_link" target="_blank" class="project-link" data-link="Ver Proyecto">Ver Proyecto</a>
+                </div>
+            </div>
+
+            <!-- Marcha del Orgullo -->
+            <div class="project-card" data-category="fotografia">
+                <div class="project-thumb"></div>
+                <div class="project-info">
+                    <span class="project-tag" data-tag="foto">Fotografía</span>
+                    <h3 class="p-title">Marcha del Orgullo</h3>
+                    <p class="p-desc" data-es="Fotorreportaje y memoria visual de la movilización." data-en="Photojournalism and visual memory of the march.">Fotorreportaje y memoria visual de la movilización.</p>
+                    <a href="https://drive.google.com/file/d/1U4CauUA3rrNezxpAatf6J3WyPMNWUzD1/view?usp=drive_link" target="_blank" class="project-link" data-link="Ver Proyecto">Ver Proyecto</a>
+                </div>
+            </div>
+
+            <!-- Todavía existe la ternura alrededor -->
+            <div class="project-card" data-category="fotografia">
+                <div class="project-thumb"></div>
+                <div class="project-info">
+                    <span class="project-tag" data-tag="foto">Fotografía</span>
+                    <h3 class="p-title">Todavía existe la ternura alrededor</h3>
+                    <p class="p-desc" data-es="Ensayo fotográfico y registro artístico documental." data-en="Photographic essay and artistic documentary record.">Ensayo fotográfico y registro artístico documental.</p>
+                    <a href="https://drive.google.com/file/d/14WvKLLI8tMAoxckuXxvuWxXewRKU14-k/view?usp=drive_link" target="_blank" class="project-link" data-link="Ver Proyecto">Ver Proyecto</a>
+                </div>
+            </div>
+
+            <!-- Rutinas -->
+            <div class="project-card" data-category="audiovisual">
+                <div class="project-thumb"></div>
+                <div class="project-info">
+                    <span class="project-tag" data-tag="av">Audiovisual</span>
+                    <h3 class="p-title">RUTINAS</h3>
